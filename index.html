@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ooga booga.net</title>
+  <title>My GitHub Pages Site</title>
   <style>
     body {
       color: orange;
@@ -21,16 +21,38 @@
     p {
       text-align: center;
     }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: orange;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <h1>CONSIDER THE FOLLOWING</h1>
-  <p>DO THE DIE</p>
+  <h1>CONSIDER THE FOLOWING</h1>
+  <p> </p>
   
-  <video autoplay loop>
+  <video id="bgVideo" autoplay loop muted>
     <source src="video.mp4" type="video/mp4">
     Your browser does not support the video element.
   </video>
   
+  <button id="playButton">Play Video</button>
+  
+  <script>
+    const video = document.getElementById('bgVideo');
+    const playButton = document.getElementById('playButton');
+
+    playButton.addEventListener('click', function() {
+      video.play();
+      playButton.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
