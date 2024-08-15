@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>HELLO YOU LITTLE SHIT</title>
+  <title>My GitHub Pages Site</title>
   <style>
     body {
       color: orange;
@@ -35,19 +35,29 @@
   </style>
 </head>
 <body>
-  <h1>CONSIDER THE FOLOWING</h1>
-  <p> </p>
+  <h1>Welcome to my GitHub Pages site!</h1>
+  <p>This is a simple example of a GitHub Pages site with a video background and orange text.</p>
   
   <video id="bgVideo" autoplay loop muted>
     <source src="video.mp4" type="video/mp4">
     Your browser does not support the video element.
   </video>
   
+  <audio id="bgMusic" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  
   <button id="playButton">Play Video</button>
   
   <script>
     const video = document.getElementById('bgVideo');
+    const audio = document.getElementById('bgMusic');
     const playButton = document.getElementById('playButton');
+
+    video.addEventListener('play', function() {
+      audio.play();
+    });
 
     playButton.addEventListener('click', function() {
       video.play();
