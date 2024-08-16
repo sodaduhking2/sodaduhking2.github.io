@@ -35,6 +35,15 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    .images {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+    .images img {
+      width: 30%;
+      margin: 0 10px;
+    }
   </style>
 </head>
 <body>
@@ -59,6 +68,12 @@
   </audio>
   
   <button id="playButton">THE ULTIMATE BUTTON</button>
+  
+  <div class="images">
+    <img src="image1.jpg" alt="Image 1">
+    <img src="image2.jpg" alt="Image 2">
+    <img src="image3.jpg" alt="Image 3">
+  </div>
   
   <script>
     const video = document.getElementById('bgVideo');
