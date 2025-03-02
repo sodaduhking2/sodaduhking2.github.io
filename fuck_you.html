@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>IP Address Information</title>
+    <title>:)</title>
     <style>
         body {
             background-image: url('fuck you.gif');
@@ -40,7 +40,7 @@
         <div id="ip-info"></div>
     </div>
 
-    <audio id="fuck-you-audio" src="fuck_you.mp3" autoplay></audio>
+    <audio id="fuck-you-audio" src="fuck_you.mp3" autoplay loop></audio>
 
     <script>
         function getIPInfo() {
@@ -72,11 +72,11 @@
                 setTimeout(() => {
                     infoContainer.innerHTML += `<p>${key}: ${ipInfo[key]}</p>`;
                 }, delay);
-                delay += 2000; // 4 seconds delay between each piece of information
+                delay += 1000;
             });
         }
 
-        // Call the function to get IP info initially
+        
         getIPInfo();
     </script>
 </body>
