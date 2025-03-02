@@ -2,15 +2,6 @@
 <html>
 <head>
     <title>IP Address Information</title>
-  
-  <audio autoplay loop>
-  <source src="fuck_you.mp3" type="audio/mpeg">
-</audio>
-  
-  <meta property="og:title" content="fuck you >:(">
-  <meta property="og:description" content="fuck you">
-  <meta property="og:image" content="https://sodaduhking2.github.io/sodaduhking2.github.io/background.jpg">
-  <meta property="og:url" content="https://sodaduhking2.github.io/fuck_you.html">
     <style>
         body {
             background-image: url('fuck you.gif');
@@ -49,22 +40,25 @@
         <div id="ip-info"></div>
     </div>
 
+    <audio id="fuck-you-audio" src="fuck_you.mp3" autoplay loop></audio>
+
     <script>
         function getIPInfo() {
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
                     const ip = data.ip;
-                    fetch(`https://ipapi.co/${ip}/json/`)
+                    fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://ipapi.co/${ip}/json/`)}`)
                         .then(response => response.json())
                         .then(data => {
+                            const ipInfo = JSON.parse(data.contents);
                             const info = `
-                                <p>Your IP Address: ${data.ip}</p>
-                                <p>City: ${data.city}</p>
-                                <p>Region: ${data.region}</p>
-                                <p>Country: ${data.country_name}</p>
-                                <p>Latitude: ${data.latitude}</p>
-                                <p>Longitude: ${data.longitude}</p>
+                                <p>Your IP Address: ${ipInfo.ip}</p>
+                                <p>City: ${ipInfo.city}</p>
+                                <p>Region: ${ipInfo.region}</p>
+                                <p>Country: ${ipInfo.country_name}</p>
+                                <p>Latitude: ${ipInfo.latitude}</p>
+                                <p>Longitude: ${ipInfo.longitude}</p>
                             `;
                             document.getElementById('ip-info').innerHTML = info;
                         })
