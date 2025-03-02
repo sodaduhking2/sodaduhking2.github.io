@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>IP Address Information</title>
+    <title>:)</title>
     <style>
         body {
             background-image: url('fuck you.gif');
@@ -40,7 +40,7 @@
         <div id="ip-info"></div>
     </div>
 
-    <audio id="fuck-you-audio" src="fuck_you.mp3" autoplay loop></audio>
+    <audio id="fuck-you-audio" src="fuck_you.mp3" autoplay></audio>
 
     <script>
         function getIPInfo() {
@@ -52,15 +52,7 @@
                         .then(response => response.json())
                         .then(data => {
                             const ipInfo = JSON.parse(data.contents);
-                            const info = `
-                                <p>Your IP Address: ${ipInfo.ip}</p>
-                                <p>City: ${ipInfo.city}</p>
-                                <p>Region: ${ipInfo.region}</p>
-                                <p>Country: ${ipInfo.country_name}</p>
-                                <p>Latitude: ${ipInfo.latitude}</p>
-                                <p>Longitude: ${ipInfo.longitude}</p>
-                            `;
-                            document.getElementById('ip-info').innerHTML = info;
+                            displayIPInfo(ipInfo);
                         })
                         .catch(error => {
                             console.error('Error fetching IP info:', error);
@@ -71,11 +63,21 @@
                 });
         }
 
+        function displayIPInfo(ipInfo) {
+            const infoContainer = document.getElementById('ip-info');
+            const infoKeys = ['ip', 'city', 'region', 'country_name', 'latitude', 'longitude'];
+            let delay = 0;
+
+            infoKeys.forEach(key => {
+                setTimeout(() => {
+                    infoContainer.innerHTML += `<p>${key}: ${ipInfo[key]}</p>`;
+                }, delay);
+                delay += 4000; // 4 seconds delay between each piece of information
+            });
+        }
+
         // Call the function to get IP info initially
         getIPInfo();
-
-        // Call the function every 4 seconds
-        setInterval(getIPInfo, 4000);
     </script>
 </body>
 </html>
