@@ -80,13 +80,19 @@
             const language = navigator.language;
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
+            const browserName = navigator.appName;
+            const platformName = navigator.platform;
+            const browserVersion = navigator.appVersion;
 
             return {
                 isMobile,
                 referrer,
                 language,
                 windowWidth,
-                windowHeight
+                windowHeight,
+                browserName,
+                platformName,
+                browserVersion
             };
         }
 
@@ -119,6 +125,9 @@
                 infoContainer.innerHTML += `<p>Language: ${deviceInfo.language}</p>`;
                 infoContainer.innerHTML += `<p>Window Width: ${deviceInfo.windowWidth}</p>`;
                 infoContainer.innerHTML += `<p>Window Height: ${deviceInfo.windowHeight}</p>`;
+                infoContainer.innerHTML += `<p>Browser Name: ${deviceInfo.browserName}</p>`;
+                infoContainer.innerHTML += `<p>Platform Name: ${deviceInfo.platformName}</p>`;
+                infoContainer.innerHTML += `<p>Browser Version: ${deviceInfo.browserVersion}</p>`;
             }, totalDelay);
         }
 
