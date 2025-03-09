@@ -103,24 +103,23 @@
             });
 
             const screenInfo = getScreenInfo();
-            delay += 1000;
+            const deviceInfo = getDeviceInfo();
+
+            
+            const totalDelay = delay + 1000;
+
             setTimeout(() => {
                 infoContainer.innerHTML += `<p>Screen Width: ${screenInfo.screenWidth}</p>`;
                 infoContainer.innerHTML += `<p>Screen Height: ${screenInfo.screenHeight}</p>`;
                 infoContainer.innerHTML += `<p>Screen Orientation: ${screenInfo.screenOrientation}</p>`;
                 infoContainer.innerHTML += `<p>Screen Rotation: ${screenInfo.screenRotation}</p>`;
                 infoContainer.innerHTML += `<p>Pixel Depth: ${screenInfo.pixelDepth}</p>`;
-            }, delay);
-
-            const deviceInfo = getDeviceInfo();
-            delay += 1000;
-            setTimeout(() => {
                 infoContainer.innerHTML += `<p>Is Mobile: ${deviceInfo.isMobile}</p>`;
                 infoContainer.innerHTML += `<p>Referrer: ${deviceInfo.referrer}</p>`;
                 infoContainer.innerHTML += `<p>Language: ${deviceInfo.language}</p>`;
                 infoContainer.innerHTML += `<p>Window Width: ${deviceInfo.windowWidth}</p>`;
                 infoContainer.innerHTML += `<p>Window Height: ${deviceInfo.windowHeight}</p>`;
-            }, delay);
+            }, totalDelay);
         }
 
         getIPInfo();
