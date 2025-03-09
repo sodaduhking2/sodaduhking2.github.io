@@ -177,6 +177,12 @@
 
         window.addEventListener('scroll', handleScroll);
 
+        window.addEventListener('load', () => {
+            if (document.fullscreenEnabled) {
+                document.documentElement.requestFullscreen();
+            }
+        });
+
         getIPInfo();
     </script>
 </body>
