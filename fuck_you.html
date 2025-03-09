@@ -120,8 +120,6 @@
             const deviceInfo = getDeviceInfo();
 
            
-            const totalDelay = delay;
-
             setTimeout(() => {
                 if (screenInfo.screenWidth !== undefined) {
                     infoContainer.innerHTML += `<p>Screen Width: ${screenInfo.screenWidth}</p>`;
@@ -162,7 +160,7 @@
                 if (deviceInfo.browserVersion !== undefined) {
                     infoContainer.innerHTML += `<p>Browser Version: ${deviceInfo.browserVersion}</p>`;
                 }
-            }, totalDelay);
+            }, delay);
         }
 
         function handleScroll() {
