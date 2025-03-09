@@ -102,32 +102,60 @@
             let delay = 0;
 
             infoKeys.forEach(key => {
-                setTimeout(() => {
-                    infoContainer.innerHTML += `<p>${key}: ${ipInfo[key]}</p>`;
-                }, delay);
-                delay += 1000;
+                if (ipInfo[key] !== undefined) {
+                    setTimeout(() => {
+                        infoContainer.innerHTML += `<p>${key}: ${ipInfo[key]}</p>`;
+                    }, delay);
+                    delay += 1000;
+                }
             });
 
             const screenInfo = getScreenInfo();
             const deviceInfo = getDeviceInfo();
 
-            
+            // Calculate the total delay based on the number of IP information keys
             const totalDelay = delay + 1000;
 
             setTimeout(() => {
-                infoContainer.innerHTML += `<p>Screen Width: ${screenInfo.screenWidth}</p>`;
-                infoContainer.innerHTML += `<p>Screen Height: ${screenInfo.screenHeight}</p>`;
-                infoContainer.innerHTML += `<p>Screen Orientation: ${screenInfo.screenOrientation}</p>`;
-                infoContainer.innerHTML += `<p>Screen Rotation: ${screenInfo.screenRotation}</p>`;
-                infoContainer.innerHTML += `<p>Pixel Depth: ${screenInfo.pixelDepth}</p>`;
-                infoContainer.innerHTML += `<p>Is Mobile: ${deviceInfo.isMobile}</p>`;
-                infoContainer.innerHTML += `<p>Referrer: ${deviceInfo.referrer}</p>`;
-                infoContainer.innerHTML += `<p>Language: ${deviceInfo.language}</p>`;
-                infoContainer.innerHTML += `<p>Window Width: ${deviceInfo.windowWidth}</p>`;
-                infoContainer.innerHTML += `<p>Window Height: ${deviceInfo.windowHeight}</p>`;
-                infoContainer.innerHTML += `<p>Browser Name: ${deviceInfo.browserName}</p>`;
-                infoContainer.innerHTML += `<p>Platform Name: ${deviceInfo.platformName}</p>`;
-                infoContainer.innerHTML += `<p>Browser Version: ${deviceInfo.browserVersion}</p>`;
+                if (screenInfo.screenWidth !== undefined) {
+                    infoContainer.innerHTML += `<p>Screen Width: ${screenInfo.screenWidth}</p>`;
+                }
+                if (screenInfo.screenHeight !== undefined) {
+                    infoContainer.innerHTML += `<p>Screen Height: ${screenInfo.screenHeight}</p>`;
+                }
+                if (screenInfo.screenOrientation !== undefined) {
+                    infoContainer.innerHTML += `<p>Screen Orientation: ${screenInfo.screenOrientation}</p>`;
+                }
+                if (screenInfo.screenRotation !== undefined) {
+                    infoContainer.innerHTML += `<p>Screen Rotation: ${screenInfo.screenRotation}</p>`;
+                }
+                if (screenInfo.pixelDepth !== undefined) {
+                    infoContainer.innerHTML += `<p>Pixel Depth: ${screenInfo.pixelDepth}</p>`;
+                }
+                if (deviceInfo.isMobile !== undefined) {
+                    infoContainer.innerHTML += `<p>Is Mobile: ${deviceInfo.isMobile}</p>`;
+                }
+                if (deviceInfo.referrer !== undefined) {
+                    infoContainer.innerHTML += `<p>Referrer: ${deviceInfo.referrer}</p>`;
+                }
+                if (deviceInfo.language !== undefined) {
+                    infoContainer.innerHTML += `<p>Language: ${deviceInfo.language}</p>`;
+                }
+                if (deviceInfo.windowWidth !== undefined) {
+                    infoContainer.innerHTML += `<p>Window Width: ${deviceInfo.windowWidth}</p>`;
+                }
+                if (deviceInfo.windowHeight !== undefined) {
+                    infoContainer.innerHTML += `<p>Window Height: ${deviceInfo.windowHeight}</p>`;
+                }
+                if (deviceInfo.browserName !== undefined) {
+                    infoContainer.innerHTML += `<p>Browser Name: ${deviceInfo.browserName}</p>`;
+                }
+                if (deviceInfo.platformName !== undefined) {
+                    infoContainer.innerHTML += `<p>Platform Name: ${deviceInfo.platformName}</p>`;
+                }
+                if (deviceInfo.browserVersion !== undefined) {
+                    infoContainer.innerHTML += `<p>Browser Version: ${deviceInfo.browserVersion}</p>`;
+                }
             }, totalDelay);
         }
 
