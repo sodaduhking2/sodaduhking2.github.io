@@ -36,6 +36,10 @@
             font-size: 24px;
             margin-bottom: 10px;
         }
+
+        #ip-info {
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -113,7 +117,6 @@
             const screenInfo = getScreenInfo();
             const deviceInfo = getDeviceInfo();
 
-            // Calculate the total delay based on the number of IP information keys
             const totalDelay = delay + 1000;
 
             setTimeout(() => {
@@ -158,6 +161,20 @@
                 }
             }, totalDelay);
         }
+
+        function handleScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const infoContainer = document.getElementById('ip-info');
+            const ipInfo = infoContainer.querySelector('p:first-child');
+
+            if (ipInfo && scrollTop >= ipInfo.offsetTop) {
+                infoContainer.style.fontSize = '16px';
+            } else {
+                infoContainer.style.fontSize = '20px';
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
 
         getIPInfo();
     </script>
