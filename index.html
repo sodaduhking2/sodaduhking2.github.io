@@ -191,5 +191,17 @@
         });
     });
   </script>
+  <script>
+document.addEventListener('contextmenu', function(event) {
+  event.preventDefault();
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode === 123) {
+    event.preventDefault();
+    window.close();
+  }
+});
+  </script>
 </body>
 </html>
