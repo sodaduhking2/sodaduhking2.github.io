@@ -46,4 +46,48 @@ Relatives: Mother, father, sisters, brothers, spouses and/or former spouses of C
 </center>
   </body>
   </head>
+<script>
+const imageSrc = "waffles.png";
+const numImages = 1;
+const imageSize = 30; 
+const dispersion = 50; 
+const animationDuration = 500; 
+
+document.addEventListener("mousemove", (event) => {
+  const x = event.clientX;
+  const y = event.clientY;
+
+  for (let i = 0; i < numImages; i++) {
+    const img = document.createElement("img");
+    img.src = imageSrc;
+    img.style.position = "absolute";
+    img.style.width = imageSize + "px";
+    img.style.height = imageSize + "px";
+    img.style.pointerEvents = "none";
+    img.style.zIndex = "9999";
+
+    
+    const randomX = x + (Math.random() - 0.5) * dispersion;
+    const randomY = y + (Math.random() - 0.5) * dispersion;
+
+    img.style.left = randomX + "px";
+    img.style.top = randomY + "px";
+
+
+    document.body.appendChild(img);
+
+    
+    img.style.opacity = 1;
+    img.style.transition = `opacity ${animationDuration}ms ease-out`;
+
+    setTimeout(() => {
+      img.style.opacity = 0;
+      setTimeout(() => {
+        img.remove();
+      }, animationDuration);
+    }, 10); 
+  }
+});
+
+</script>
 </html>
