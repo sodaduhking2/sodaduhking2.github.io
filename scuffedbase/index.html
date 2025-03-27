@@ -1,82 +1,75 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
   <title>Pastebin</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-
-    textarea {
-      width: 100%;
-      height: 300px;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      resize: vertical;
-    }
-
-    button {
-      display: block;
-      margin-top: 10px;
-      padding: 10px;
-      font-size: 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #3e8e41;
-    }
-
-    #pastebin-url {
-      margin-top: 10px;
-    }
-  </style>
 </head>
 <body>
   <h1>Pastebin</h1>
-  <textarea id="pastebin-content" placeholder="Enter your content here..."></textarea>
-  <button onclick="createPastebin()">Create Pastebin</button>
-  <div id="pastebin-url"></div>
+  <form id="pasteForm">
+    <textarea id="pasteText" rows="10" cols="50"></textarea>
+    <br>
+    <button type="submit">Create Paste</button>
+  </form>
+
+  <div id="pastes"></div>
 
   <script>
-    function createPastebin() {
-      const content = document.getElementById('pastebin-content').value;
-      const url = 'https://api.github.com/gists';
+    const pasteForm = document.getElementById('pasteForm');
+    const pasteText = document.getElementById('pasteText');
+    const pastesDiv = document.getElementById('pastes');
 
-      const data = {
-        description: 'Pastebin content',
-        public: true,
-        files: {
-          'pastebin.txt': {
-            content: content
-          }
-        }
+    pasteForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const pasteContent = pasteText.value;
+      const pasteData = {
+        content: pasteContent,
       };
 
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Authorization': 'token <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>',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-        .then(response => response.json())
-        .then(data => {
-          const pastebinUrl = data.html_url;
-          document.getElementById('pastebin-url').innerHTML = `Pastebin URL: <a href="${pastebinUrl}">${pastebinUrl}</a>`;
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('An error occurred while creating the pastebin.');
+      try {
+        const response = await fetch('/api/createPaste', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(pasteData),
         });
+
+        if (response.ok) {
+          const pasteId = await response.text();
+          window.location.href = `/paste/${pasteId}`;
+        } else {
+          throw new Error('Error creating paste');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    });
+
+    // Function to fetch and display pastes
+    async function displayPastes() {
+      try {
+        const response = await fetch('/api/getPastes');
+        const pastes = await response.json();
+
+        pastesDiv.innerHTML = '';
+
+        pastes.forEach((paste) => {
+          const pasteElement = document.createElement('div');
+          pasteElement.innerHTML = `
+            <h3>${paste.id}</h3>
+            <pre>${paste.content}</pre>
+          `;
+          pastesDiv.appendChild(pasteElement);
+        });
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
+
+    // Initial call to display pastes
+    displayPastes();
   </script>
 </body>
 </html>
