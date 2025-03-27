@@ -31,7 +31,7 @@
   </style>
 </head>
 <body>
-  <h1>GitHub Pastebin</h1>
+  <h1>scuffedbase</h1>
   <textarea id="pastebin-input"></textarea>
   <button onclick="createPastebin()">upload</button>
   
@@ -39,7 +39,7 @@
     function createPastebin() {
       const input = document.getElementById('pastebin-input').value;
       const encodedInput = encodeURIComponent(input);
-      const pastebinUrl = `https://github.com/sodaduhking2/sodaduhking2.github.io/blob/main/pastebin?content=${encodedInput}`;
+      const pastebinUrl = `https://github.com/sodaduhking2/sodaduhking2.github.io/scuffedbase/blob/main/pastebin?content=${encodedInput}`;
       
       window.open(pastebinUrl, '_blank');
     }
