@@ -28,7 +28,7 @@
       };
 
       try {
-        const response = await fetch('/api/createPaste', {
+        const response = await fetch('/api/createPaste.js', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -50,7 +50,7 @@
     // Function to fetch and display pastes
     async function displayPastes() {
       try {
-        const response = await fetch('/api/getPastes');
+        const response = await fetch('/api/getPastes.js');
         const pastes = await response.json();
 
         pastesDiv.innerHTML = '';
