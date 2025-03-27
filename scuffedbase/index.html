@@ -1,47 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>scuffedbase</title>
+  <title>Pastebin</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
     }
-    
+
     textarea {
       width: 100%;
       height: 300px;
       padding: 10px;
       font-size: 16px;
       border: 1px solid #ccc;
-      border-radius: 4px;
       resize: vertical;
     }
-    
+
     button {
-      padding: 10px 20px;
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
       font-size: 16px;
-      background-color: #007bff;
-      color: #fff;
+      background-color: #4CAF50;
+      color: white;
       border: none;
-      border-radius: 4px;
       cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3e8e41;
+    }
+
+    #pastebin-url {
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>scuffedbase</h1>
-  <textarea id="pastebin-input"></textarea>
-  <button onclick="createPastebin()">upload</button>
-  
+  <h1>Pastebin</h1>
+  <textarea id="pastebin-content" placeholder="Enter your content here..."></textarea>
+  <button onclick="createPastebin()">Create Pastebin</button>
+  <div id="pastebin-url"></div>
+
   <script>
     function createPastebin() {
-      const input = document.getElementById('pastebin-input').value;
-      const encodedInput = encodeURIComponent(input);
-      const pastebinUrl = `https://github.com/sodaduhking2/sodaduhking2.github.io/scuffedbase/blob/main/pastebin?content=${encodedInput}`;
-      
-      window.open(pastebinUrl, '_blank');
+      const content = document.getElementById('pastebin-content').value;
+      const url = 'https://api.github.com/gists';
+
+      const data = {
+        description: 'Pastebin content',
+        public: true,
+        files: {
+          'pastebin.txt': {
+            content: content
+          }
+        }
+      };
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'token <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>',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          const pastebinUrl = data.html_url;
+          document.getElementById('pastebin-url').innerHTML = `Pastebin URL: <a href="${pastebinUrl}">${pastebinUrl}</a>`;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('An error occurred while creating the pastebin.');
+        });
     }
   </script>
 </body>
