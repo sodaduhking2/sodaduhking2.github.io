@@ -1,9 +1,64 @@
 <html>
   <head>
     <body style="background-color:black;">
+      <audio src="torrents.mp3" autoplay loop></audio>
+      <style>
+        body {
+            background-color: black;
+            overflow: hidden;
+        }
+        .snowflake {
+            position: absolute;
+            font-size: 10px;
+            color: white;
+        }
+      </style>
+      <center>
       <pre>
-      <h1 style="color:orange;">uploading clean steam files here ill be uploading deltarune soon</h1>
+      <h1 style="color:orange;">uploading clean steam files here YAY FREE GAMES FOR YOU BECAUSE YOUR POOR</h1>
+      <a href="https://cdn.discordapp.com/attachments/1316237360635314259/1382459450371084469/DELTARUNE.zip?ex=684b3b31&is=6849e9b1&hm=f3c3dd77c3f392a065c5cb5ffcce476fe81835db6c77754f93add836480f7ac6&">
+        <button style="color:orange;">deltarune</button>
+      </a>
       </pre>
+        <script>
+          function createSnowflake() {
+            var snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            var size = Math.random() * 10 + 5;
+            snowflake.style.fontSize = size + 'px';
+            var color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            snowflake.style.color = color;
+            var x = Math.random() * window.innerWidth;
+            var y = Math.random() * window.innerHeight;
+            snowflake.style.left = x + 'px';
+            snowflake.style.top = y + 'px';
+            var speed = Math.random() * 2 + 1;
+            var angle = Math.random() * 360;
+            var angleRadians = angle * Math.PI / 180;
+            var dx = Math.cos(angleRadians) * speed;
+            var dy = Math.sin(angleRadians) * speed;
+            var duration = Math.random() * 5000 + 5000;
+            var delay = Math.random() * 1000;
+            var animation = 'keyframes snowflake' + Math.random().toString(36).substr(2, 9);
+            var keyframes = '@keyframes ' + animation + ' {';
+            for (var i = 0; i <= 100; i++) {
+                var newX = x + dx * i;
+                var newY = y + dy * i;
+                if (newX < 0 || newX > window.innerWidth || newY < 0 || newY > window.innerHeight) {
+                    break;
+                }
+                keyframes += i + '% { left: ' + newX + 'px; top: ' + newY + 'px; }';
+            }
+            keyframes += '}';
+            var style = document.createElement('style');
+            style.innerHTML = keyframes;
+            document.head.appendChild(style);
+            snowflake.style.animation = animation + ' ' + duration + 'ms ' + delay + 'ms infinite linear';
+            document.body.appendChild(snowflake);
+        }
+        setInterval(createSnowflake, 100);
+        </script>
+      </center>
     </body>
   </head>
 </html>
